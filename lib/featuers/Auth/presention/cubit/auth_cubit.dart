@@ -8,9 +8,9 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this.authRepo) : super(AuthInitial());
   AuthRepo authRepo;
 
-  registerUser(String email, String password) async {
+  registerUser(String email, String password, String name, String phone) async {
     emit(AuthLoading());
-    final result = await authRepo.register(email, password);
+    final result = await authRepo.register(email, password, name, phone);
     result.fold(
         (f) => emit(AuthError(f.message)), (r) => emit(AuthSuccess(r!.email!)));
   }

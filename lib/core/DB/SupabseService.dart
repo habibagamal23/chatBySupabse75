@@ -36,4 +36,29 @@ class SupabseService implements DbService {
       rethrow;
     }
   }
+
+  String? get CurrentUserId {
+    return client.auth.currentUser!.id;
+  }
+
+  @override
+  Future<void> insert(String table, Map<String, dynamic> data) async {
+    try {
+      await client.from(table).insert(data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> fetchAllDatabyFilterNeq(
+      String table, String column, String value) async {
+    try {
+      final response = await client.from(table).select().neq(column, value);
+
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
