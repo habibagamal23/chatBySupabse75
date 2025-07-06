@@ -17,14 +17,13 @@ void main() async {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBteWtmbGFmeGhteWt3enh5ZmNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3OTI0NzUsImV4cCI6MjA2NjM2ODQ3NX0.B0F-5VVLamSXL5i1zio-tjOAVE42CeROBoVYiaJ0iT4",
   );
   setupServiceLocator();
-  runApp(MultiBlocProvider(providers: [
-    BlocProvider(
-      create: (_) => getIt<ContactsCubit>()..fechConcts(),
-    ),
-    BlocProvider(
-      create: (_) => getIt<ProfileCubit>()..fetchProfile(),
-    )
-  ], child: const MyApp()));
+  runApp(
+      MultiBlocProvider(providers: [
+      BlocProvider(
+      create: (_) => getIt<ContactsCubit>()..fechConcts(),),
+        BlocProvider(create: (_) => getIt<ProfileCubit>()..fetchProfile(),)
+  ],
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

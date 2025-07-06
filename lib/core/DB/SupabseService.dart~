@@ -39,6 +39,7 @@ class SupabseService implements DbService {
     }
   }
 
+
   @override
   Future<void> insert(String table, Map<String, dynamic> data) async {
     try {
@@ -73,21 +74,13 @@ class SupabseService implements DbService {
     }
   }
 
-  @override
-  Future<List<Map<String, dynamic>>> getAllData(String table) async {
-    try {
-      final response = await client.from(table).select();
-      return response;
-    } catch (e) {
-      rethrow;
-    }
-  }
+
 
   @override
-  Future<void> upadte(String table, Map<String, dynamic> data, String column,
-      String value) async {
+  Future<List<Map<String, dynamic>>> getAllData(String table) {
     try {
-      final response = await client.from(table).update(data).eq(column, value);
+      final response = client.from(table).select();
+      return response;
     } catch (e) {
       rethrow;
     }

@@ -18,7 +18,12 @@ class Homescreen extends StatelessWidget {
                 await SupabseService().signOut();
                 context.go(RouterGeneration.register);
               },
-              icon: Icon(Icons.logout))
+              icon: Icon(Icons.logout)),
+          IconButton(
+              onPressed: () {
+                context.go(RouterGeneration.prfile);
+              },
+              icon: Icon(Icons.person))
         ],
       ),
       body: Center(

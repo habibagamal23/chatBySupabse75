@@ -5,6 +5,8 @@ import '../../featuers/Auth/data/repo/AuthRepo.dart';
 import '../../featuers/Auth/presention/cubit/auth_cubit.dart';
 import '../../featuers/contacts/data/repo/contactsRepo.dart';
 import '../../featuers/contacts/presention/cubit/contacts_cubit.dart';
+import '../../featuers/profile/data/repo/profileRepo.dart';
+import '../../featuers/profile/presention/cubit/profile_cubit.dart';
 import '../DB/dbService.dart';
 
 GetIt getIt = GetIt.instance;
@@ -16,8 +18,12 @@ void setupServiceLocator() {
   getIt.registerSingleton<AuthRepo>(AuthRepoImpl(getIt.get<DbService>()));
   getIt.registerSingleton<ContactsRepo>(
       ContactsRepoImpl(getIt.get<DbService>()));
+  getIt.registerSingleton<ProfileRepo>(ProfileRepoImpl(getIt<DbService>()));
+
   //cubit
   getIt.registerFactory<AuthCubit>(() => AuthCubit(getIt.get<AuthRepo>()));
   getIt.registerFactory<ContactsCubit>(
       () => ContactsCubit(getIt.get<ContactsRepo>()));
+  getIt.registerFactory<ProfileCubit>(
+      () => ProfileCubit(getIt.get<ProfileRepo>()));
 }
