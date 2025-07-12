@@ -1,4 +1,5 @@
 import 'package:chat75/core/service_locator/service_locator.dart';
+import 'package:chat75/featuers/Home/presention/room_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -23,6 +24,9 @@ void main() async {
     ),
     BlocProvider(
       create: (_) => getIt<ProfileCubit>()..fetchProfile(),
+    ),
+    BlocProvider(
+      create: (_) => getIt<RoomCubit>()..getallRooms(),
     )
   ], child: const MyApp()));
 }
