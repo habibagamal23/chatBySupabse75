@@ -1,4 +1,5 @@
 import 'package:chat75/core/service_locator/service_locator.dart';
+import 'package:chat75/featuers/Home/presention/messages_cubit.dart';
 import 'package:chat75/featuers/Home/presention/room_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +28,9 @@ void main() async {
     ),
     BlocProvider(
       create: (_) => getIt<RoomCubit>()..getallRooms(),
+    ) ,
+    BlocProvider(
+      create: (_) => getIt<MessagesCubit>()
     )
   ], child: const MyApp()));
 }

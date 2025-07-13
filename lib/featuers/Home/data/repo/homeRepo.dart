@@ -1,4 +1,5 @@
 import 'package:chat75/core/DB/dbService.dart';
+import 'package:chat75/featuers/Home/data/model/message.dart';
 import 'package:chat75/featuers/Home/data/model/roomModel.dart';
 import 'package:dartz/dartz.dart';
 
@@ -90,4 +91,37 @@ class HomeRepo {
   // }
 
 // get all room
+
+  Future<void> sendMessage(roomId, content) async {
+    final myid = supabseService.client.auth.currentUser!.id;
+
+    Message message = Message(
+        roomId: roomId,
+        senderId: myid,
+        content: content,
+        createdAt: DateTime.now());
+    try {
+      await dbService.insert("messages", message.toJson());
+
+      print("message sent");
+
+      await dbService.upadte("rooms", {"lastMessage": content}, "id", roomId);
+    } catch (e) {
+      throw Exception("the error is $e");
+    }
+  }
+
+  Stream<List<Message>> getAllMessages(roomId) {
+    try {
+      final stream = supabseService.client
+          .from("messages")
+          .stream(primaryKey: ['id'])
+          .eq('roomId', roomId)
+          .order('createdAt', ascending: false);
+
+      return stream.map((e) => e.map((e) => Message.fromJson(e)).toList());
+    } catch (e) {
+      throw Exception("the error is $e");
+    }
+  }
 }

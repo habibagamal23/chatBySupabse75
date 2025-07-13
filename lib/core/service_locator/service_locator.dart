@@ -1,5 +1,6 @@
 import 'package:chat75/core/DB/SupabseService.dart';
 import 'package:chat75/featuers/Home/data/repo/homeRepo.dart';
+import 'package:chat75/featuers/Home/presention/messages_cubit.dart';
 import 'package:chat75/featuers/Home/presention/room_cubit.dart';
 import 'package:get_it/get_it.dart';
 
@@ -29,4 +30,6 @@ void setupServiceLocator() {
   getIt.registerFactory<ProfileCubit>(
       () => ProfileCubit(getIt.get<ProfileRepo>()));
   getIt.registerFactory<RoomCubit>(() => RoomCubit(getIt.get<HomeRepo>()));
+  getIt.registerFactory<MessagesCubit>(
+      () => MessagesCubit(getIt.get<HomeRepo>()));
 }

@@ -38,6 +38,9 @@ class Homescreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final room = state.rooms[index];
                 return ListTile(
+                  onTap: () {
+                    context.push(RouterGeneration.chat, extra: room);
+                  },
                   title: Text("${room.otherUserInfo?.uesr_name}"),
                   subtitle: Text("${room.lastMessage}"),
                   trailing: Text("${room.unreadMessages}"),

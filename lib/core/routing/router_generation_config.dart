@@ -1,4 +1,6 @@
 import 'package:chat75/core/service_locator/service_locator.dart';
+import 'package:chat75/featuers/Home/data/model/roomModel.dart';
+import 'package:chat75/featuers/Home/presention/screens/chatScreen.dart';
 import 'package:chat75/featuers/Home/presention/screens/homescreen.dart';
 import 'package:chat75/featuers/profile/presention/screens/ProfileScreen.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,7 @@ class RouterGeneration {
   static const String login = "/login";
   static const String conacts = "/conacts";
   static const String prfile = "/prfile";
+  static const String chat = "/chat";
   static GoRouter goRouter = GoRouter(
       initialLocation: register,
       routes: [
@@ -44,6 +47,12 @@ class RouterGeneration {
             path: prfile,
             builder: (context, state) {
               return Profilescreen();
+            }),
+        GoRoute(
+            path: chat,
+            builder: (context, state) {
+              final room = state.extra as RoomModel;
+              return ChatScreen(room: room);
             }),
       ],
       debugLogDiagnostics: true,
